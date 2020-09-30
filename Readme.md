@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
-* Студент: [Ярослав Работицький](https://up.htmlacademy.ru/javascript/21/user/1136485).
-* Наставник: `Неизвестно`.
+- Студент: [Ярослав Работицький](https://up.htmlacademy.ru/javascript/21/user/1136485).
+- Наставник: [Вадим Попов](https://htmlacademy.ru/profile/id1503771).
 
 ---
 
