@@ -10,15 +10,16 @@ const PHOTOS_LINKS_ARRAY = [
   `http://o0.github.io/assets/images/tokyo/hotel2.jpg`,
   `http://o0.github.io/assets/images/tokyo/hotel3.jpg`
 ];
+const pinCoordinate = {
+  X: 50,
+  Y: 70,
+};
 
 const map = document.querySelector(`.map`);
 map.classList.remove(`map--faded`);
 
 const mapElement = document.querySelector(`.map__pins`);
-
-const cardTemplate = document.querySelector(`#card`)
-  .content
-  .querySelector(`.map__card`);
+const pinTemplate = document.querySelector(`#pin`).content.querySelector(`.map__pin`);
 
 const getRandomIntegerInRange = function (min, max) {
   min = Math.ceil(min);
@@ -39,7 +40,7 @@ const getRandomObjectsArray = function (arrLength) {
   for (let i = 0; i < arrLength; i++) {
     const someObject = {
       author: {
-        avatar: AVATAR_ADDRESS + `0` + (i + 1)
+        avatar: `${AVATAR_ADDRESS}0${(i + 1)}.png`
       },
       offer: {
         title: TITLES[i],
@@ -67,26 +68,21 @@ const getRandomObjectsArray = function (arrLength) {
 
 const cardObjectsArray = getRandomObjectsArray(8);
 
-const renderCard = function (object) {
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector(`.popup__avatar`).textContent = object.author.avatar;
-  cardElement.querySelector(`.popup__title`).textContent = object.offer.title;
-  cardElement.querySelector(`.popup__text--address`).textContent = object.offer.address;
-  cardElement.querySelector(`.popup__text--price`).textContent = `${object.offer.price} $/ночь`;
-  cardElement.querySelector(`.popup__type`).textContent = object.offer.type;
-  cardElement.querySelector(`.popup__text--capacity`).textContent = `${object.offer.rooms} комнаты для ${object.offer.guests} гостей`;
-  cardElement.querySelector(`.popup__text--time`).textContent = `Заезд после ${object.offer.checkin}, выезд до ${object.offer.checkout}`;
-  cardElement.querySelector(`.popup__features`).textContent = object.offer.features;
-  cardElement.querySelector(`.popup__description`).textContent = object.offer.description;
-  cardElement.querySelector(`.popup__photos`).src = `http://o0.github.io/assets/images/tokyo/hotel1.jpg`;
-  return cardElement;
+const renderPin = function (object) {
+  const pin = pinTemplate.cloneNode(true);
+  pin.style = `left: ${object.location.x + pinCoordinate.X / 2}px; top: ${object.location.y + pinCoordinate.Y}px`;
+  pin.children[0].src = object.author.avatar;
+  pin.children[0].alt = object.offer.title;
+
+  return pin;
 };
 
-const fillSimilarCard = function (cardsArray) {
+const fillMapElement = function (objectsArray) {
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < cardsArray.length; i++) {
-    fragment.appendChild(renderCard(cardsArray[i]));
+  for (let i = 0; i < objectsArray.length; i++) {
+    fragment.appendChild(renderPin(objectsArray[i]));
   }
   mapElement.appendChild(fragment);
 };
-fillSimilarCard(cardObjectsArray);
+
+fillMapElement(cardObjectsArray);
