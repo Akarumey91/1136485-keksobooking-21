@@ -10,7 +10,7 @@ const PHOTOS_LINKS_ARRAY = [
   `http://o0.github.io/assets/images/tokyo/hotel2.jpg`,
   `http://o0.github.io/assets/images/tokyo/hotel3.jpg`
 ];
-const pinCoordinate = {
+const pinSize = {
   X: 50,
   Y: 70,
 };
@@ -70,7 +70,7 @@ const cardObjectsArray = getRandomObjectsArray(8);
 
 const renderPin = function (object) {
   const pin = pinTemplate.cloneNode(true);
-  pin.style = `left: ${object.location.x + pinCoordinate.X / 2}px; top: ${object.location.y + pinCoordinate.Y}px`;
+  pin.style = `left: ${object.location.x - pinSize.X / 2}px; top: ${object.location.y - pinSize.Y}px`;
   pin.children[0].src = object.author.avatar;
   pin.children[0].alt = object.offer.title;
 
