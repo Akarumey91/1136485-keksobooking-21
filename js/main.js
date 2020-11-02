@@ -10,6 +10,7 @@ const POPUP_PHOTOS_ARRAY = [
   `http://o0.github.io/assets/images/tokyo/hotel2.jpg`,
   `http://o0.github.io/assets/images/tokyo/hotel3.jpg`
 ];
+
 const pinSize = {
   X: 50,
   Y: 70,
